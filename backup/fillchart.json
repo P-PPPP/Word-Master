@@ -1,0 +1,27 @@
+
+{
+
+    "code":1,
+    "msg":"处理成功",
+    "data":{
+        "task_id":6126597,
+        "topic_index":7474,
+        "course_id":"QXB_3",
+        "list_id":"QXB_3_5_A",
+        "word":"diminish",
+        "topic_mode":51,
+        "stem":{
+            "content":"{diminish} the cost",
+            "remark":"减少开支"
+        },
+        "answer_content":"diminish",
+        "study_type":2,
+        "task_control_id":12678655,
+        "task_type":1,
+        "topic_total":393,
+        "topic_done_num":352,
+        "answer_state":1,
+        "tips":null
+    }
+
+}

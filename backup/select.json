@@ -1,0 +1,56 @@
+
+{
+
+    "code":1,
+    "msg":"处理成功",
+    "data":{
+        "task_id":6448934,
+        "topic_index":7907,
+        "course_id":"QXB_3",
+        "list_id":"QXB_3_5_B",
+        "word":"negative",
+        "topic_mode":42,
+        "stem":{
+            "content":"Seventy-nine voted in the affirmative, and none in the {negative}.",
+            "remark":"79人投赞成票，没有人投反对票。"
+        },
+        "options":[
+            {
+                "content":"negative",
+                "remark":null,
+                "answer":true,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"inevitable",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"favorable",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"apt",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            }
+        ],
+        "study_type":2,
+        "task_control_id":13733920,
+        "task_type":1,
+        "topic_total":47,
+        "topic_done_num":34,
+        "answer_state":1,
+        "tips":"选择合适的单词,补全句子(多义词的每项词义都会被考查)"
+    }
+
+}

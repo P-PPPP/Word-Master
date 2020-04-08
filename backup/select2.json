@@ -1,0 +1,55 @@
+{
+
+    "code":1,
+    "msg":"处理成功",
+    "data":{
+        "task_id":6448934,
+        "topic_index":7907,
+        "course_id":"QXB_3",
+        "list_id":"QXB_3_5_B",
+        "word":"negative",
+        "topic_mode":42,
+        "stem":{
+            "content":"They reported fewer {negative} physical symptoms such as headaches or colds, and they were active in ways that were good for them.",
+            "remark":"他们鲜有诉说头疼感冒之类的身体不适症状，积极参加健康有益的活动。"
+        },
+        "options":[
+            {
+                "content":"favorable",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"apt",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"inevitable",
+                "remark":null,
+                "answer":false,
+                "check_code":null,
+                "sub_options":null
+            },
+            {
+                "content":"negative",
+                "remark":null,
+                "answer":true,
+                "check_code":null,
+                "sub_options":null
+            }
+        ],
+        "study_type":2,
+        "task_control_id":13733920,
+        "task_type":1,
+        "topic_total":47,
+        "topic_done_num":34,
+        "answer_state":1,
+        "tips":null
+    }
+
+}
