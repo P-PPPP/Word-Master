@@ -3,6 +3,7 @@
 Alpha，是第1个希腊字母。 小写α用于物理学上： 角加速度 Alpha粒子和相关的Alpha衰变 小写α用于数学上： α：阿克曼反函数，一个输出值增长速度非常低的函数。 「Alpha」常用作形容词，以显示某件事物中最重要或最初的，例如软体工程中的Alpha版本。 --wikipedia
 ##### 所以由于一些原因,现在不能达到100%自动满分.以后的版本亦不能保证.
 # 食用方法
+
 <video id="video" controls="" preload="none" poster="http://img.blog.fandong.me/2017-08-26-Markdown-Advance-Video.jpg">
       <source id="mp4" src="useage.mp4" type="video/mp4">
       </video>
