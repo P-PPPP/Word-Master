@@ -1,0 +1,5 @@
+if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
+    oSession.utilDecodeResponse();//解码数据包
+    oSession.SaveResponse("../ThisDataPacket.txt",true);//储存数据包
+    oSession.SaveResponseBody("../ThisDataPacketBody.json");
+}
