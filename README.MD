@@ -4,7 +4,7 @@ Alpha，是第1个希腊字母。 小写α用于物理学上： 角加速度 Alp
 ##### 所以由于一些原因,现在不能达到100%自动满分.以后的版本亦不能保证.
 # 食用方法
 [视频](https://b23.tv/BV1Vz41187T9 "release")
-1. 从我们的[release](https://github.com/peterpei1186861238/Word-Master/releases "release")界面下载最新的版本，解压
+1. 从我们的[release](/releases "release")界面下载最新的版本，解压
 
 2. 打开`Fiddler/Fiddler.exe`
 
