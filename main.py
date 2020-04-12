@@ -1,5 +1,8 @@
 # -*- coding: UTF-8 -*-
-#copyright ： Peterpei 2020 - 2020
+#copyright ： Peterpei 2020 - 2020 version2
+import os.path#规避可能发生的找不到文件问题
+import time
+import random#引入两个库 用于点击模拟操作
 import  os
 import  json
 import  pyautogui #点击事件
@@ -8,14 +11,19 @@ lastJson = 0
 bugreport = 0
 while   (roll < 200):
     #解析json
-    openfile = open("ThisDataPacketBody.json", mode="r", encoding="utf-8")#打开文件
+    rantime = random.randint(1,2)#随机生成点击时间
+    scriptpath = os.path.dirname(__file__)
+    filename = os.path.join(scriptpath, 'ThisDataPacketBody.json')
+    openfile=open(filename, encoding = "utf-8", mode="r")
+    #莫名原因出现的bug...佛了
+
     GetJson = openfile.read()
     JsonDict = json.loads(GetJson)
     Data = JsonDict["data"]#选取源json文件中data部分，继续解析
     #判断是否出现bug,由于点击事件太快导致脚本根本来不及响应.....增加bugreport计数，对太快响应导致的“bug”进行过滤
     if lastJson == Data :
         bugreport = bugreport + 1
-        if bugreport > 3:
+        if bugreport > 2:
             print   ("Maybe something wrong.../Break the loop")
             break
     else:
@@ -57,10 +65,12 @@ while   (roll < 200):
         else:
             xPosion = ( findLeng - 45 ) * 10 + 35
             yPosion = 225 + 40 
-
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=xPosion, y=yPosion, clicks=1, button='left')
         pyautogui.typewrite(answer)
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=250, y=450, clicks=1, button='left')
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=450, y=1000, clicks=1, button='left')
 
     elif AnswerTypeselect == True and AnswerTypeMultiSelect == False and AnswerTypeMultiCombine == False:
@@ -69,7 +79,7 @@ while   (roll < 200):
         questionDir = Data["stem"]
         question = questionDir["content"]#拿题目长度
         #获取正确选项
-        lengthNums = len(question)
+        #lengthNums = len(question)
         a = 0
         i = 0    
         while (a < 3):
@@ -82,14 +92,14 @@ while   (roll < 200):
         ansy = 0
         #对题目长度进行分类讨论和适配
         #重写对行数的函数
-        length = lengthNums * 10
+        length = len(question)
         print   (Options[i]["content"])
         print   (length)
         a = 0 #问题在于单词是连续的，不能一个单词显示两行..
         while (a < 8):
-            if a * 450 < length <= (a + 1) * 450:
+            if a * 45 < length <= (a + 1) * 45:
                 lengy = a + 1
-                if 0< length < 300:
+                if 0< length < 20:
                     lengy = 1.5
             a = a + 1
 
@@ -104,7 +114,9 @@ while   (roll < 200):
         elif i == 3:
             ansy=260 + 70*(i+1) + 45*(lengy -1)
         #pyautogui.moveTo(x=300, y=ansy)
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=300, y=ansy, clicks=1, button='left')
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=450, y=1000, clicks=1, button='left')
         print   (lengy)
     
@@ -119,6 +131,7 @@ while   (roll < 200):
         lenselections = len(Options)
         while  (Selections < lenselections):
             if Options[Selections]["answer"] == True :
+                time.sleep(rantime)#停止点击
                 pyautogui.click(x=X, y=Y, clicks=1, button='left')
                 print   (Options[Selections]["content"])
 
@@ -133,7 +146,7 @@ while   (roll < 200):
             if X + len(Options[Selections]["content"])*15 + 50 > 500:
                 X = 35
                 Y = Y + 75
-
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=450, y=1000, clicks=1, button='left')
 
 
@@ -141,6 +154,19 @@ while   (roll < 200):
         #连接词组题
         selectnums = Data["stem"]
         content = selectnums["content"]
+        contentleng = len(content)
+        print  (contentleng)
+        judgeIf = '.'
+        if judgeIf in content:
+            elements =(contentleng - 1 - 6) / 2 + 1
+        else:
+            elements = (contentleng - 1) / 2 + 1#词达人的同学你好，这也是你们的意料之中?
+        a = 0
+        while (a <= 3):
+            if a*4 < elements <= (a + 1)*4 :
+                length = a 
+                print   ("行数是",length + 1)
+            a = a + 1
         #拿到一共需要选几个
         contentlen = len(content)
         answerContent = Data["answer_content"]
@@ -157,12 +183,15 @@ while   (roll < 200):
                     X = 150 
                 else:
                     X = 350
-                Y = ( roll1 // 2 ) * 70 + 500
+                Y = ( roll1 // 2 ) * 70 + 500 + length*70
+                print   (answer[roll2])
+                time.sleep(rantime)#停止点击
                 pyautogui.click(x=X, y=Y, clicks=1, button='left')
                 roll2 = roll2 + 1
                 roll1 = 0
             else:
                 roll1 = roll1 + 1
+        time.sleep(rantime)#停止点击
         pyautogui.click(x=450, y=1000, clicks=1, button='left')
         
 
