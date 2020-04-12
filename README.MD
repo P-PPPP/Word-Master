@@ -2,13 +2,22 @@
 # 4.12 感谢vocabgo 官方 ，因为开始堵我脚本，我不但绕过了，还修复了几个bug2333333，等会更新
 ![logo](https://s1.ax1x.com/2020/04/08/GRyPCq.png "logo")
 # Word-Master-α
-Alpha，是第1个希腊字母。 小写α用于物理学上： 角加速度 Alpha粒子和相关的Alpha衰变 小写α用于数学上： α：阿克曼反函数，一个输出值增长速度非常低的函数。 「Alpha」常用作形容词，以显示某件事物中最重要或最初的，例如软体工程中的Alpha版本。 --wikipedia
+Alpha，是第1个希腊字母。「Alpha」常用作形容词，以显示某件事物中最重要或最初的，例如软体工程中的Alpha版本。 --wikipedia
 ##### 所以由于一些原因,现在不能达到100%自动满分.以后的版本亦不能保证.
 # 食用方法
-[视频](https://b23.tv/BV1Vz41187T9 "release")
+# [视频强烈推荐看一下](https://b23.tv/BV1Vz41187T9 "release")
 1. 从我们的[release](../../releases "release")界面下载最新的版本，解压
 
 2. 打开`Fiddler/Fiddler.exe`
+
+3. 按照视频设置过滤器和FiddlerScript,在FiddlerScript的OnResponse里加入
+```
+if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
+    oSession.utilDecodeResponse();//解码数据包
+    oSession.SaveResponse("../ThisDataPacket.txt",true);//储存数据包
+    oSession.SaveResponseBody("../ThisDataPacketBody.json");
+}
+```
 
 3. 打开电脑端词达人，并位于第一题(我并没有写认识单词的界面，所以你需要手动跳过)
 
@@ -20,6 +29,7 @@ Alpha，是第1个希腊字母。 小写α用于物理学上： 角加速度 Alp
 # 效率
 ![](https://s1.ax1x.com/2020/04/08/GRfEWj.png)
 脚本运行时间2min23s，正确率98.62%
+# 2020.4.12补充:因为词达人官方同学进行干扰，这种秒速在这个版本(V1.2)是见不到了QAQ...也许未来还会再见
 # 编译 & 二次开发
 **使用GPL协议,如果要用代码的话建议先去看看什么是[GPL协议](https://www.gnu.org/licenses/gpl-3.0.html "GPL协议")**
 -  环境配置
