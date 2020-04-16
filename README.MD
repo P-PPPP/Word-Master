@@ -53,6 +53,7 @@ if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
 
 # 编译 & 二次开发
 **使用GPL协议,如果要用代码的话建议先去看看什么是[GPL协议](https://www.gnu.org/licenses/gpl-3.0.html "GPL协议")**
+[GPL协议官方中文版](https://jxself.org/translations/gpl-3.zh.shtml "GPL协议")
 -  环境配置
 我们的release 版本均采用 Win10 64 bit 环境配置，32bit理论通用，由于加载库的原因，目前尚未支持Linux以及mac os。安装最新的python3 及 pip
 - 执行`pip install pyautogui`安装依赖库
