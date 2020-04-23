@@ -1,4 +1,5 @@
 # 学习永远是自己的事情 且仅用于学习交流使用
+status：error
 ![logo](https://s1.ax1x.com/2020/04/08/GRyPCq.png "logo")
 # Word-Master-β
 在电脑范畴，Beta软件也能代表电脑软件的测试版，通常指的是公开测试版，提供一般使用者协助测试并回报问题。详见软件出版周期。 -β 版本
@@ -38,6 +39,8 @@ automode：0:自动答题模式 , 1:bug反馈模式
 -   由于 beta 版也可能存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
 
 # 效率
+![](https://s1.ax1x.com/2020/04/23/JwLwL9.png)
+2.0beta效率
 ![](https://s1.ax1x.com/2020/04/08/GRfEWj.png)
 脚本运行时间2min23s，正确率98.62%
 ![](https://s1.ax1x.com/2020/04/13/GjrGgP.png)
