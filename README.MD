@@ -29,16 +29,12 @@ if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
 {
     "rolltime":"100",
     "waitTime":"0.5",
-    "autoMode":"0",
-    "pauseKey":"q",
-    "continueKey":"a"
+    "autoMode":"0"
 }
 ```
 rolltime:循环次数 默认100
 waittime：点击默认延迟，规避错误
-automode：正在开发 ， 自动答题模式
-pausekey:暂停热键
-continuekey:继续热键
+automode：0:自动答题模式 , 1:bug反馈模式
 # 注意事项
 -   由于 beta 版也可能存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
 
