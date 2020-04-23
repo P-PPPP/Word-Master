@@ -61,10 +61,11 @@ automode：0:自动答题模式 , 1:bug反馈模式
 我们的release 版本均采用 Win10 64 bit 环境配置，32bit理论通用，由于加载库的原因，目前尚未支持Linux以及mac os。安装最新的python3 及 pip
 - 执行
 ```
+安装依赖库
 pip install pyautogui
 pip install pytesseract
 
-```安装依赖库
+```
 - 用你的IDE打开并修改,编译
 # Credits
 [pyautogui](https://github.com/asweigart/pyautogui "pyautogui")
