@@ -1,19 +1,11 @@
 # 学习永远是自己的事情
-###### 我寻思着我因为懒才写这玩意的 ，整的现在每天更新脚本，咋还变勤快了呢...来看的都是懒狗🐶🐶🐶🐶🐶🐶🐶🐶🐶
-###### 我自己也受不了多选题的正确率了 ， 下个版本应该有大更新 ， bug反馈机制直接改为手动暂停模式，不过最近事多 ， 随缘吧
-4.20 有莫名其妙的bug，很严重。。。唉
-4.23 顺利的话周末更新 。
-##### 这位同学，用我源码就用了...我这GPL 3.0 协议就是给二次开发看的 ， 加上我名字这么难吗?
 ![logo](https://s1.ax1x.com/2020/04/08/GRyPCq.png "logo")
-# Word-Master-α
-Alpha版本的产品仍然需要完整的功能测试，而其功能亦未完善，但是可以满足一般需求。
-因为它是整个软件开发周期中的第一个主要阶段，所以它的名称是「Alpha」，希腊字母中的第一个字母。
---alpha 版本
-##### 所以由于一些原因,现在不能达到100%自动满分.以后的版本亦不能保证.
+# Word-Master-β
+在电脑范畴，Beta软件也能代表电脑软件的测试版，通常指的是公开测试版，提供一般使用者协助测试并回报问题。详见软件出版周期。 -β 版本
 # 食用方法
 # [视频强烈推荐看一下](https://b23.tv/BV1Vz41187T9 "release")
 视频里面少说一点东西，有问题问我，先不重录视频了(重录视频肯定把这句话删掉 4.16
-1. 从我们的[release](../../releases "release")界面下载最新的版本，解压
+1. 从我们的[release](../../releases "release")界面下载最新的版本，解压,安装`tesseract-ocr-setup-3.02.02.exe`
 
 2. 打开`Fiddler/Fiddler.exe`
 
@@ -30,16 +22,25 @@ if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
 
 4. 把窗口位于最左，并且高度全满，宽度最小（如图，**而且目前只支持1920 x 1080 分辨率的输出**）
 
-5. power shell打开Main.exe 自动完成。
+5. power shell键入`.\main.exe` 自动完成。
 
 1. **附加:1.3 版本新增了user.json选项 以后允许用户对脚本进行更多的自定义项目**
 ```
 {
-    "rolltime":300
+    "rolltime":"100",
+    "waitTime":"0.5",
+    "autoMode":"0",
+    "pauseKey":"q",
+    "continueKey":"a"
 }
 ```
+rolltime:循环次数 默认100
+waittime：点击默认延迟，规避错误
+automode：正在开发 ， 自动答题模式
+pausekey:暂停热键
+continuekey:继续热键
 # 注意事项
--   由于 alpha 版存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
+-   由于 beta 版也可能存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
 
 # 效率
 ![](https://s1.ax1x.com/2020/04/08/GRfEWj.png)
@@ -50,6 +51,7 @@ if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
 #### 2020.4.12补充:因为词达人官方同学进行干扰，这种秒速在这个版本(V1.2)是见不到了QAQ...也许未来还会再见
 
 # 时间轴
+###### 4.23 New version (beta) realeased
 ###### 4.16 前几天一个同学跟我聊天，说他是直接伪造请求。我觉着挺好，但是我这种懒狗...唉，可能不会去分析请求，有这时间还不如跟**女孩子**聊天呢QAQ
 ###### 复现了 3 - 4次110003错误 ， 下个版本看看能不能规避
 ###### 4.13 word master 1.3 版更新，简化了代码复杂度 利用函数编程降低整体耦合度 易于维护和升级
@@ -61,9 +63,18 @@ if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
 [GPL协议官方中文版](https://jxself.org/translations/gpl-3.zh.shtml "GPL协议")
 -  环境配置
 我们的release 版本均采用 Win10 64 bit 环境配置，32bit理论通用，由于加载库的原因，目前尚未支持Linux以及mac os。安装最新的python3 及 pip
-- 执行`pip install pyautogui`安装依赖库
+- 执行
+```
+pip install pyautogui
+pip install pytesseract
+
+```安装依赖库
 - 用你的IDE打开并修改,编译
 # Credits
 [pyautogui](https://github.com/asweigart/pyautogui "pyautogui")
+[pytesseract](https://github.com/madmaze/pytesseract "pytesseract")
+[keyboard](https://github.com/boppreh/keyboard "keyboard")
+[PIL](https://github.com/python-pillow/Pillow "pillow")
+
 # LICENSE
 [GPL V3.0](LICENSE "GPL V3.0")
