@@ -1,4 +1,6 @@
 
 {
-    "rolltime":300
+    "rolltime":"100",
+    "waitTime":"0.5",
+    "autoMode":"0"
 }
