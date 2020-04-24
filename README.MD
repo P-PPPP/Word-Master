@@ -1,7 +1,4 @@
 # 学习永远是自己的事情 且仅用于学习交流使用
-.. image:: 	https://img.shields.io/github/release/madmaze/pytesseract.svg
-   :target: https://github.com/madmaze/pytesseract/releases
-   :alt: Github release
 ![logo](https://s1.ax1x.com/2020/04/08/GRyPCq.png "logo")
 # Word-Master-β
 在电脑范畴，Beta软件也能代表电脑软件的测试版，通常指的是公开测试版，提供一般使用者协助测试并回报问题。详见软件出版周期。 -β 版本
