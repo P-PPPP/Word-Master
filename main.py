@@ -227,7 +227,8 @@ while True:
             time.sleep(2)
         elif autoMode[questionStatus] == 1 and nightmode == 1:
             NightMode()
-    
+        else:
+            time.sleep(bugreport*0.5)
     else:
         lastJson = Data
         bugreport = 0
