@@ -25,7 +25,7 @@ nightmode：全自动答题
 -   由于 beta 版也可能存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
 
 # 效率
-![JsCBBq.png](https://s1.ax1x.com/2020/04/25/JsCBBq.png)
+![JyqwxP.png](https://s1.ax1x.com/2020/04/25/JyqwxP.png)
 2.1beta 效率
 ![](https://s1.ax1x.com/2020/04/23/JwLwL9.png)
 2.0beta效率
