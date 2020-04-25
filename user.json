@@ -1,6 +1,11 @@
 
 {
-    "rolltime":"100",
     "waitTime":"0.5",
-    "autoMode":"0"
+    "NightMode":"0",
+    "autoMode":{
+        "fillchart":"1",
+        "singleSelect":"1",
+        "combine":"1",
+        "multiselect":"1"
+    }
 }
