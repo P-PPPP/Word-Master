@@ -93,7 +93,7 @@ def singleSelect(Data , rantime , autoMode):#单选{普通单选 语音单选}
             position =(0,200,500,800)
             screenshot = ImageGrab.grab(position)
             screenshot.save('test2.PNG', "PNG")#截取题目图片并进行OCR
-            file1 = os.path.join(scriptpath, '../test2.PNG')
+            file1 = os.path.join(scriptpath, 'test2.PNG')
             ocr = pytesseract.image_to_string(file1)
             line = 0
             null = ""
@@ -156,7 +156,7 @@ def multiselectOcr(Data , rantime , autoMode):#新版多选题
     position =(0,400,500,900)
     screenshot = ImageGrab.grab(position)
     screenshot.save('test2.PNG', "PNG")#截取题目图片并进行OCR
-    file1 = os.path.join(scriptpath, '../test2.PNG')
+    file1 = os.path.join(scriptpath, 'test2.PNG')
     ocr = pytesseract.image_to_string(file1)
     line = 0
     realline = 0
