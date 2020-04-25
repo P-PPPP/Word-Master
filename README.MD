@@ -3,41 +3,30 @@
 # Word-Master-β
 在电脑范畴，Beta软件也能代表电脑软件的测试版，通常指的是公开测试版，提供一般使用者协助测试并回报问题。详见软件出版周期。 -β 版本
 # 食用方法
-# [视频强烈推荐看一下](https://b23.tv/BV1Vz41187T9 "release")
-1. 从我们的[release](../../releases "release")界面下载最新的版本，解压,安装`tesseract-ocr-setup-3.02.02.exe`
-
-2. 打开`Fiddler/Fiddler.exe`
-
-3. 按照视频设置过滤器和FiddlerScript,在FiddlerScript的OnResponse里加入
-```
-if(oSession.uriContains("https://wap.vocabgo.com/Student/ClassTask")){
-    oSession.utilDecodeResponse();//解码数据包
-    oSession.SaveResponse("../ThisDataPacket.txt",true);//储存数据包
-    oSession.SaveResponseBody("../ThisDataPacketBody.json");
-}
-```
-
-3. 打开电脑端词达人，并位于第一题(我并没有写认识单词的界面，所以你需要手动跳过)
-
-4. 把窗口位于最左，并且高度全满，宽度最小（如图，**而且目前只支持1920 x 1080 分辨率的输出**）
-
-5. power shell键入`.\main.exe` 自动完成。
+# [视频](https://b23.tv/BV1Vz41187T9 "release")
 
 1. **附加:1.3 版本新增了user.json选项 以后允许用户对脚本进行更多的自定义项目**
 ```
 {
-    "rolltime":"100",
     "waitTime":"0.5",
-    "autoMode":"0"
+    "NightMode":"0",
+    "autoMode":{
+        "fillchart":"1",
+        "singleSelect":"1",
+        "combine":"1",
+        "multiselect":"1"
+    }
 }
 ```
-rolltime:循环次数 默认100
 waittime：点击默认延迟，规避错误
-automode：0:自动答题模式 , 1:bug反馈模式
+automode：0:只显示答案 ，1：做题
+nightmode：全自动答题
 # 注意事项
 -   由于 beta 版也可能存在bug，所以我引入了自动暂停机制，其次所有正确答案输出在屏幕上，便于手动点击。
 
 # 效率
+![JsCBBq.png](https://s1.ax1x.com/2020/04/25/JsCBBq.png)
+2.1beta 效率
 ![](https://s1.ax1x.com/2020/04/23/JwLwL9.png)
 2.0beta效率
 ![](https://s1.ax1x.com/2020/04/08/GRfEWj.png)
@@ -48,6 +37,17 @@ automode：0:自动答题模式 , 1:bug反馈模式
 #### 2020.4.12补充:因为词达人官方同学进行干扰，这种秒速在这个版本(V1.2)是见不到了QAQ...也许未来还会再见
 
 # 时间轴
+###### 4.25 2.1beta
+2.1: 
+2020.4.25
+simpified code and logic
+fillchart : add copy
+optimize voice question logic and judgement ,speed up the effenction
+added new autoMode and print mode for just print the ans 
+no rolltime any longer
+fix can not auto stop bug
+fix some annoying bug
+
 ###### 4.23 New version (beta) realeased
 ###### 4.16 前几天一个同学跟我聊天，说他是直接伪造请求。我觉着挺好，但是我这种懒狗...唉，可能不会去分析请求，有这时间还不如跟**女孩子**聊天呢QAQ
 ###### 复现了 3 - 4次110003错误 ， 下个版本看看能不能规避
