@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-#copyright ： Peterpei 2020 - 2020 version 2.0 2020.4.23
-#任何事物都不及“伟大”那样简单；事实上，能够简单便是伟大。——爱默生 
-import os.path , time , os , json , pyautogui ,keyboard , pytesseract#规避可能发生的找不到文件问题
+#copyright ： Peterpei 2020 - 2020 version 2.1 2020.4.25
+#be like water
+import os.path , time , os , json , pyautogui , pytesseract , random ,pyperclip#规避可能发生的找不到文件问题
 from PIL import Image , ImageGrab
 lastJson = 0
 
@@ -9,14 +9,13 @@ lastJson = 0
 scriptpath = os.path.dirname(__file__)
 userfilename = os.path.join(scriptpath, 'user.json')
 userjson =open(userfilename, encoding = "utf-8", mode="r")
+
 userjson1 = userjson.read()
 userJsonDict = json.loads(userjson1)
-rolltime = userJsonDict["rolltime"]#读取循环次数
-#pauseHotkey = userJsonDict["pauseKey"]#读取暂停键
-#continueHotkey = userJsonDict["continueKey"]#读取暂停键
-autoMode = userJsonDict["autoMode"]#是否为自动模式
-test = userJsonDict["waitTime"]#自定义等待时长
-rantime = float(test)
+autoMode = userJsonDict["autoMode"]#是否为自动模式,0为不自动，仅显示 1为自动
+nightmode = userJsonDict["NightMode"]#
+deftime = userJsonDict["waitTime"]#自定义等待时长
+rantime = float(deftime)
 
 def openjsonfile():#打开文件
     filename = os.path.join(scriptpath, 'ThisDataPacketBody.json')
@@ -41,87 +40,84 @@ def judgetype(Data):#解析题型
             AnswerTypeMultiCombine = True#多选词组
     return AnswerTypeselect , AnswerTypeMultiSelect , AnswerTypeMultiCombine 
 
-def fillchart(Data , rantime):#填空题
+def fillchart(Data , rantime ,autoMode):#填空题
     answer = Data["answer_content"]
-    answerLen = len(answer)
-    questionDir = Data["stem"]
-    question = questionDir["content"]
-    QuestionLeng = len(question)
-    listQuestion = list(question)
-    findLeng = 0
-    while (findLeng < QuestionLeng) :
-        if listQuestion[findLeng] == '{' :
-            break
-        findLeng = findLeng + 1
-        
-    print   (findLeng)
-    if  findLeng < 45:
-        xPosion =  35 + findLeng * 15 + answerLen
-        yPosion = 225
-    else:
-        xPosion = ( findLeng - 45 ) * 10 + 35
-        yPosion = 225 + 40 
-    time.sleep(rantime)#停止点击
-    pyautogui.click(x=xPosion, y=yPosion, clicks=1, button='left')
-    pyautogui.typewrite(answer)
     print   ("正确答案是", answer)
-    pyautogui.click(x=250, y=450, clicks=1, button='left')
-    time.sleep(rantime)#停止点击
-    pyautogui.click(x=450, y=1000, clicks=1, button='left')
+    pyperclip.copy(answer)
+    if  int(autoMode["fillchart"]) == 1:
+        answerLen = len(answer)
+        questionDir = Data["stem"]
+        question = questionDir["content"]
+        QuestionLeng = len(question)
+        listQuestion = list(question)
+        findLeng = 0
+        while (findLeng < QuestionLeng) :
+            if listQuestion[findLeng] == '{' :
+                break
+            findLeng = findLeng + 1
+            
+        if  findLeng < 45:
+            xPosion =  35 + findLeng * 15 + answerLen
+            yPosion = 225
+        else:
+            xPosion = ( findLeng - 45 ) * 10 + 35
+            yPosion = 225 + 40 
+        time.sleep(rantime)#停止点击
+        pyautogui.click(x=xPosion, y=yPosion, clicks=1, button='left')
+        pyautogui.typewrite(answer)
+        pyautogui.click(x=250, y=450, clicks=1, button='left')
+        time.sleep(rantime)#停止点击
+        pyautogui.click(x=450, y=1000, clicks=1, button='left')
 
-def singleSelect(Data , rantime):#单选{普通单选 语音单选}
+def singleSelect(Data , rantime , autoMode):#单选{普通单选 语音单选}
     Options = Data["options"]
     questionDir = Data["stem"]
     question = questionDir["content"]#拿题目长度
     #获取正确选项
-    a = 0
-    i = 0    
+    a = 0 #I：正确选项次序
+    i = 0  
     while (a < 3):
         if Options[i]["answer"] == True:
             break
         else:
             i = i + 1
             a = a + 1
-    ansy = 0
-    #对题目长度进行分类讨论和适配
-    #重写对行数的函数
-    length = len(question)
     print   ("正确答案是",Options[i]["content"])
-    position =(0,0,500,800)
-    screenshot = ImageGrab.grab(position)
-    screenshot.save('test2.PNG', "PNG")#截取题目图片并进行OCR
-    file1 = os.path.join(scriptpath, 'test2.PNG')
-    ocr = pytesseract.image_to_string(file1)
-    line = 0
-    null = ""
-    while (ocr.splitlines()[4+line].strip() != null):
-        line = line + 1
-    lengy = line
-    if 0< length < 20:
-        lengy = 1.5
-        #第一个数值是初始顶端到第一个选项中心的高度 第二个是各选项中心高度差 第三个是描述题目行数高度
-        #来源1920 x 1080 的数据.
-    if i == 0:
-        ansy = 260 + 70*(i+1) + 45*(lengy -1)
-    elif i == 1:
-        ansy = 260 +70*(i+1) +45*(lengy -1)
-    elif i == 2:
-        ansy =260 + 70*(i+1) + 45*(lengy -1)
-    elif i == 3:
-        ansy=260 + 70*(i+1) + 45*(lengy -1)
-    pyautogui.click(x=300, y=ansy, clicks=1, button='left')
-    time.sleep(rantime)#停止点击
-    pyautogui.click(x=450, y=1000, clicks=1, button='left')
+    if int(autoMode["singleSelect"]) == 1:
+        #对题目长度进行分类讨论和适配
+        #重写对行数的函数
+        length = len(question)
+        if 0< length < 20:
+            lengy = 1.5
+        else:#优化语音题的做题速度和逻辑判断
+            position =(0,200,500,800)
+            screenshot = ImageGrab.grab(position)
+            screenshot.save('test2.PNG', "PNG")#截取题目图片并进行OCR
+            file1 = os.path.join(scriptpath, '../test2.PNG')
+            ocr = pytesseract.image_to_string(file1)
+            line = 0
+            null = ""
+            while (ocr.splitlines()[line].strip() != null):
+                line = line + 1
+            lengy = line
+            #第一个数值是初始顶端到第一个选项中心的高度 第二个是各选项中心高度差 第三个是描述题目行数高度
+            #来源1920 x 1080 的数据.
+        ansy = 260 + 70*(i+1) + 45 *(lengy - 1)
+        pyautogui.click(x=300, y=ansy, clicks=1, button='left')
+        pyautogui.click(x=450, y=1000, clicks=1, button='left')
 
-def multicombine(Data , rantime):#链接词组题
+def multicombine(Data , rantime , autoMode):#链接词组题
     selectnums = Data["stem"]
     content = selectnums["content"]
     contentleng = len(content)
-    judgeIf = '.'
-    if judgeIf in content:
+    judgeIfPoints = '..'
+    judgeIfPoint = '.'
+    if judgeIfPoints in content:
         elements =(contentleng - 1 - 6) / 2 + 1
+    elif judgeIfPoint in content:
+        elements = (contentleng - 1 - 2)/2 + 1
     else:
-        elements = (contentleng - 1) / 2 + 1#词达人的同学你好，这也是你们的意料之中?
+        elements = (contentleng - 1) / 2 + 1
     a = 0
     while (a <= 3):
         if a*4 < elements <= (a + 1)*4 :
@@ -143,27 +139,30 @@ def multicombine(Data , rantime):#链接词组题
                 X = 350
             Y = ( roll1 // 2 ) * 70 + 500 + length*70
             print   ("答案是",answer[roll2])
-            pyautogui.click(x=X, y=Y, clicks=1, button='left')
+            if int(autoMode["combine"]) == 1:
+                pyautogui.click(x=X, y=Y, clicks=1, button='left')
             roll2 = roll2 + 1
             roll1 = 0
         else:
             roll1 = roll1 + 1
     time.sleep(rantime)#停止点击
-    pyautogui.click(x=450, y=1000, clicks=1, button='left')
+    if int(autoMode["combine"]) == 1:
+        pyautogui.click(x=450, y=1000, clicks=1, button='left')
 
-def multiselectOcr(Data , rantime):#新版多选题
+def multiselectOcr(Data , rantime , autoMode):#新版多选题
     options = Data["options"]
     selections = 0
 
     position =(0,400,500,900)
     screenshot = ImageGrab.grab(position)
     screenshot.save('test2.PNG', "PNG")#截取题目图片并进行OCR
-    file1 = os.path.join(scriptpath, 'test2.PNG')
+    file1 = os.path.join(scriptpath, '../test2.PNG')
     ocr = pytesseract.image_to_string(file1)
     line = 0
     realline = 0
     null =""
     print      ("正确答案是:")
+    
     while True:
         while (ocr.splitlines()[line].strip() == null):#当行数为空时，自动跳过本行到非空行
             print   ("empty,skipping")
@@ -175,8 +174,8 @@ def multiselectOcr(Data , rantime):#新版多选题
         while ( item + 1 <= len(ocrResult) ):#对比答案和选项
             if options[selections]["answer"] == True:
                 Y = (realline+1)*75 + 385
-                print   (X,Y)
-                pyautogui.click(x = X , y = Y)
+                if int(autoMode["multiselect"]) == 1:
+                    pyautogui.click(x = X , y = Y)
                 print   (options[selections]["content"])
             X = len(ocrResult[item])*18 + 55 + X
             item =item + 1   
@@ -186,38 +185,52 @@ def multiselectOcr(Data , rantime):#新版多选题
             break
         line = line + 1
         realline = realline + 1 
-    pyautogui.click(x=450, y=1000, clicks=1, button='left')    
-    
+    if int(autoMode["multiselect"]) == 1:
+        pyautogui.click(x=450, y=1000, clicks=1, button='left')    
+
+def NightMode():
+    print   ("Test only")
+    while True:
+        randX =random.randint(35,400)
+        randY =random.randint(400,800)
+        pyautogui.click(x =randX , y = randY , button = 'left')
+        pyautogui.click(x=450, y=1000, clicks=1, button='left')
+
 
 #主函数
-roll = 0
-while (roll < int(rolltime)):
-    print   ("<<<<<<<<")
+while True:
+    print   ("<<<<<<<<<<<<<")
+    start_time = time.time()
     Data = openjsonfile()
+#判断题型
+    if judgetype(Data)[0] == False:
+        fillchart(Data , rantime, autoMode)
+        questionStatus = 'fillchart'
 
+    elif judgetype(Data)[0] == True and judgetype(Data)[1] == False and judgetype(Data)[2] == False:
+        singleSelect(Data , rantime, autoMode)
+        questionStatus = 'singleSelect'
 
+    elif judgetype(Data)[0] == True and judgetype(Data)[1] == True:
+        multiselectOcr(Data , rantime, autoMode)
+        questionStatus = 'multiselect'
+
+    elif judgetype(Data)[2] == True:
+        multicombine(Data, rantime, autoMode)
+        questionStatus = 'combine'
+#bug反馈机制
     if lastJson == Data :
         bugreport = bugreport + 1
-        if bugreport > 10 and autoMode == 1:
-            print   ("test here, under structing")
-        elif bugreport>10 and autoMode == 0:
-            print   ("auto stop")
+        if autoMode[questionStatus] == 1 and bugreport > 5 and nightmode == 0 :
             break
+        elif autoMode[questionStatus] == 0:
+            time.sleep(2)
+        elif autoMode[questionStatus] == 1 and nightmode == 1:
+            NightMode()
+    
     else:
         lastJson = Data
         bugreport = 0
-
-#判断题型
-    if judgetype(Data)[0] == False:
-        fillchart(Data , rantime)
-
-    elif judgetype(Data)[0] == True and judgetype(Data)[1] == False and judgetype(Data)[2] == False:
-        singleSelect(Data , rantime)
-
-    elif judgetype(Data)[0] == True and judgetype(Data)[1] == True:
-        multiselectOcr(Data , rantime)
-
-    elif judgetype(Data)[2] == True:
-        multicombine(Data, rantime)
-
-    roll = roll + 1
+#
+#    end_time = time.time() - start_time
+#    print   ("time spend",end_time)
